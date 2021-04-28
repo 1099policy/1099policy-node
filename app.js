@@ -7,8 +7,6 @@ const ten99policy = new T99P({
   'protocol': 'http',
 })
 
-// ten99policy.contractors.retrieve('2').catch(error => console.error(error));
-
 ten99policy.contractors.create({
   email: 'customer@example.com',
 })
