@@ -16,9 +16,8 @@ soon
 
 ## Usage
 
-The package needs to be configured with your account's secret key, which is
-available in the [1099Policy Dashboard][api-keys]. Require it with the key's
-value:
+To use the 1099Policy API you need to authenticate requests using API keys.
+Sign up for a developer account to view and manage your API keys from the the 1099Policy Dashboard. [1099Policy Dashboard][register]
 
 <!-- prettier-ignore -->
 ```js
@@ -40,4 +39,4 @@ ten99policy.jobs.retrieve([JOB_ID])
   .catch(error => console.error(error));
 ```
 
-[api-keys]: https://dashboard.1099policy.com/account/apikeys
+[api-keys]: https://dashboard.1099policy.com/register
