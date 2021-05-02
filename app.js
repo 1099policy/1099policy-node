@@ -7,8 +7,40 @@ const ten99policy = new T99P({
   'protocol': 'http',
 })
 
+// create a contractor
 ten99policy.contractors.create({
-  email: 'customer@example.com',
+  company_name: "John & Friends",
+  first_name: "John",
+  last_name: "Doe",
+  email: "example@gmail.com",
+  phone: "415-111-1111",
+  address:{
+    line1: "2211 Mission St",
+    line2: "",
+    locality: "San Francisco,",
+    region: "CA",
+    postalcode: "94110"
+  }
 })
   .then(message => console.log(message))
   .catch(error => console.error(error));
+
+// retrieve a job
+ten99policy.contractors.retrieve("cn_pQ3qj5ADg7")
+  .then(message => console.log(message))
+  .catch(error => console.error(error));
+
+// create a contractor
+ten99policy.jobs.create({
+  "name": "Truck driver",
+  "description": "Requires a truck",
+  "duration_hours": 20,
+  "wage": 100,
+  "years_experience": 20,
+  "wage_type": "flatfee",
+  "entity_id": "2",
+  "category_code": "2"
+})
+  .then(message => console.log(message))
+  .catch(error => console.error(error));
+
