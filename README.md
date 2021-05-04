@@ -11,7 +11,7 @@ Node 8, 10 or higher.
 Install the package with:
 
 ```sh
-soon
+npm install ten99policy
 ```
 
 ## Usage
@@ -26,17 +26,23 @@ const ten99policy = new T99P({
   'key': 't9sk_test_...',
 })
 
-// create a job
-ten99policy.jobs.create({
-  email: 'customer@example.com',
+// create a contractor
+ten99policy.contractors.create({
+  company_name: "John & Friends",
+  first_name: "John",
+  last_name: "Doe",
+  email: "example@gmail.com",
+  phone: "415-111-1111",
+  address:{
+    line1: "2211 Mission St",
+    line2: "",
+    locality: "San Francisco,",
+    region: "CA",
+    postalcode: "94110"
+  }
 })
-  .then(message => console.log(message))
-  .catch(error => console.error(error));
-
-// retrieve a job
-ten99policy.jobs.retrieve([JOB_ID])
   .then(message => console.log(message))
   .catch(error => console.error(error));
 ```
 
-[api-keys]: https://dashboard.1099policy.com/register
+[register]: https://dashboard.1099policy.com/register
