@@ -1,7 +1,45 @@
 {
   "name": "ten99policy",
   "version": "1.0.0",
+  "description": "1099Policy API wrapper",
+  "keywords": [
+    "1099policy",
+    "insurance",
+    "api"
+  ],
+  "homepage": "https://github.com/1099policy/ten99policy-node",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/1099policy/ten99policy-node.git"
+  },
+  "engines": {
+    "node": "^8.1 || >=10.*"
+  },
+  "devDependencies": {
+    "chai": "~4.2.0",
+    "chai-as-promised": "~7.1.1",
+    "coveralls": "^3.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-chai-friendly": "^0.4.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "mocha": "~6.1.4",
+    "mocha-junit-reporter": "^1.23.1",
+    "nock": "^10.0.6",
+    "nyc": "^14.1.0",
+    "prettier": "^1.16.4"
+  },
   "dependencies": {
     "qs": "^6.10.1"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf ./.nyc_output ./node_modules/.cache ./coverage",
+    "mocha": "nyc mocha",
+    "mocha-only": "mocha",
+    "test": "yarn lint && yarn mocha",
+    "lint": "eslint --ext .js,.jsx .",
+    "fix": "yarn lint --fix",
+    "coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   }
 }

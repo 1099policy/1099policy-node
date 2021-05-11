@@ -24,7 +24,7 @@ ten99policy.jobs.create({
   years_experience: 20,
   wage_type: "flatfee",
   entity_id: "en_KSANLvPtWF",
-  category_code: "jc_wuTDSwQ8Sr"
+  category_code: "xxx"
 })
   .then(message => console.log(message))
   .catch(error => console.error(error));
