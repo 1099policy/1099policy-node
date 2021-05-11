@@ -17,7 +17,9 @@ describe('Ten99Policy Module', function() {
         Ten99Policy({
           incorrectKey: true,
         });
-      }).to.throw(/Config object may only contain the following: key, apiVersion, maxNetworkRetries, timeout, host, port, protocol/);
+      }).to.throw(
+        /Config object may only contain the following: key, apiVersion, maxNetworkRetries, timeout, host, port, protocol/
+      );
 
       expect(() => {
         Ten99Policy({
