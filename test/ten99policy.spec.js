@@ -18,7 +18,9 @@ const contractorData = {
   company_name: 'John & Friends',
   first_name: 'John',
   last_name: 'Doe',
-  email: `example-${Math.random().toString(36).substring(7)}@gmail.com`,
+  email: `example-${Math.random()
+    .toString(36)
+    .substring(7)}@gmail.com`,
   phone: '415-111-1111',
   address: {
     line1: '2211 Mission St',
@@ -42,9 +44,7 @@ describe('Ten99Policy Module', function() {
         Ten99Policy({
           incorrectKey: true,
         });
-      }).to.throw(
-        /Config object may only contain the following:/
-      );
+      }).to.throw(/Config object may only contain the following:/);
 
       expect(() => {
         Ten99Policy({
@@ -118,12 +118,17 @@ describe('Ten99Policy Module', function() {
           expect(
             new Promise((resolve, reject) => {
               // this is just to ensure our api creates a new record
-              contractorData.email = `example-${Math.random().toString(36).substring(7)}@gmail.com`;
+              contractorData.email = `example-${Math.random()
+                .toString(36)
+                .substring(7)}@gmail.com`;
 
-              ten99policy.contractors.create(contractorData, (err, contractor) => {
-                cleanup.deleteContractor(contractor.id);
-                resolve('Called!');
-              });
+              ten99policy.contractors.create(
+                contractorData,
+                (err, contractor) => {
+                  cleanup.deleteContractor(contractor.id);
+                  resolve('Called!');
+                }
+              );
             })
           ).to.eventually.equal('Called!'));
 
@@ -132,16 +137,21 @@ describe('Ten99Policy Module', function() {
             expect(
               new Promise((resolve, reject) => {
                 // this is just to ensure our api creates a new record
-                contractorData.email = `example-${Math.random().toString(36).substring(7)}@gmail.com`;
+                contractorData.email = `example-${Math.random()
+                  .toString(36)
+                  .substring(7)}@gmail.com`;
 
-                ten99policy.contractors.create(contractorData, (err, contractor) => {
-                  cleanup.deleteContractor(contractor.id);
+                ten99policy.contractors.create(
+                  contractorData,
+                  (err, contractor) => {
+                    cleanup.deleteContractor(contractor.id);
 
-                  const headers = contractor.lastResponse.headers;
-                  expect(headers).to.contain.keys('server');
+                    const headers = contractor.lastResponse.headers;
+                    expect(headers).to.contain.keys('server');
 
-                  resolve('Called!');
-                });
+                    resolve('Called!');
+                  }
+                );
               })
             ).to.eventually.equal('Called!'));
         });

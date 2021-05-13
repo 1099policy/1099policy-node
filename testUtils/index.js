@@ -1,7 +1,11 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable lines-around-directive */
 'use strict';
 
 require('mocha');
 require('chai').use(require('chai-as-promised'));
+
+const ResourceNamespace = require('../lib/ResourceNamespace').ResourceNamespace;
 
 const utils = (module.exports = {
   getUserTen99PolicyKey: () => {
@@ -12,7 +16,71 @@ const utils = (module.exports = {
     return key;
   },
 
-   /**
+  getSpyableTen99Policy: () => {
+    // Provide a testable ten99policy instance
+    // That is, with mock-requests built in and hookable
+
+    const ten99policy = require('../lib/ten99policy');
+    const ten99policyInstance = ten99policy({
+      key: 'fakeAuthToken',
+    });
+
+    ten99policyInstance.REQUESTS = [];
+
+    for (const i in ten99policyInstance) {
+      makeInstanceSpyable(ten99policyInstance, ten99policyInstance[i]);
+    }
+
+    function makeInstanceSpyable(ten99policyInstance, thisInstance) {
+      if (thisInstance instanceof ten99policy.Ten99PolicyResource) {
+        patchRequest(ten99policyInstance, thisInstance);
+      } else if (thisInstance instanceof ResourceNamespace) {
+        const namespace = thisInstance;
+
+        for (const j in namespace) {
+          makeInstanceSpyable(ten99policyInstance, namespace[j]);
+        }
+      }
+    }
+
+    function patchRequest(ten99policyInstance, instance) {
+      instance._request = function(method, host, url, data, auth, options, cb) {
+        const req = (ten99policyInstance.LAST_REQUEST = {
+          method,
+          url,
+          data,
+          headers: options.headers || {},
+          settings: options.settings || {},
+        });
+        if (auth) {
+          req.auth = auth;
+        }
+        if (host) {
+          req.host = host;
+        }
+
+        const handleMockRequest = (err, req) => {
+          ten99policyInstance.REQUESTS.push(req);
+          cb.call(this, err, {});
+        };
+
+        if (this.requestDataProcessor) {
+          this.requestDataProcessor(
+            method,
+            data,
+            options.headers,
+            handleMockRequest
+          );
+        } else {
+          handleMockRequest(null, req);
+        }
+      };
+    }
+
+    return ten99policyInstance;
+  },
+
+  /**
    * A utility where cleanup functions can be registered to be called post-spec.
    * CleanupUtility will automatically register on the mocha afterEach hook,
    * ensuring its called after each descendent-describe block.
@@ -82,5 +150,4 @@ const utils = (module.exports = {
 
     return CleanupUtility;
   })(),
-
 });
