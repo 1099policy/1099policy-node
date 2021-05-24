@@ -1,6 +1,6 @@
 # 1099Policy Node.js Library
 
-[![Coverage Status](https://coveralls.io/repos/github/1099policy/ten99policy-node/badge.svg?branch=structuring-tests)](https://coveralls.io/github/1099policy/ten99policy-node?branch=structuring-tests)
+[![Coverage Status](https://coveralls.io/repos/github/1099policy/ten99policy-node/badge.svg?branch=master)](https://coveralls.io/github/1099policy/ten99policy-node?branch=master)
 
 Node.js client library for 1099Policy platform.
 
