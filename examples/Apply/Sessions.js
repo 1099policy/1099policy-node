@@ -16,48 +16,30 @@ const ten99policy = new T99P({
 /* Creating a session
 /*-----------------------------------------------------------------------------------*/
 
-// ten99policy.apply.sessions
-//   .create({
-//     quote_id: 'xxx',
-//     is_active: true,
-//   })
-//   .then((message) => console.log(message))
-//   .catch((error) => console.error(error));
+ten99policy.apply.sessions
+  .create({
+    success_url: "https://example.com/success",
+    cancel_url: "https://example.com/cancel",
+    job_id: "jb_btVCTcxSYD",
+    contractor_id: "cn_X8mas2QhUd"
+  })
+  .then((message) => console.log(message))
+  .catch((error) => console.error(error));
 
-// /* -----------------------------------------------------------------------------------*/
-// /* Updating a session (replace xxx with an existing session id)
-// /*-----------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------*/
+/* Fetching the list of sessions
+/*-----------------------------------------------------------------------------------*/
 
-// ten99policy.apply.sessions
-//   .update('xxx', {
-//     is_active: true,
-//   })
-//   .then((message) => console.log(message))
-//   .catch((error) => console.error(error));
-
-// /* -----------------------------------------------------------------------------------*/
-// /* Fetching the list of sessions
-// /*-----------------------------------------------------------------------------------*/
-
-// ten99policy.apply.sessions
-//   .list()
-//   .then((message) => console.log(message))
-//   .catch((error) => console.error(error));
+ten99policy.apply.sessions
+  .list()
+  .then((message) => console.log(message))
+  .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
 /* Retrieving a session (replace xxx with an existing session id)
 /*-----------------------------------------------------------------------------------*/
 
 ten99policy.apply.sessions
-  .retrieve('ias_01F6JFACFPSB6YH9A9Y1CBR6J1')
+  .retrieve('ias_01F6JEG9Z46WKWDEKE83YMFQYE')
   .then((message) => console.log(message))
   .catch((error) => console.error(error));
-
-/* -----------------------------------------------------------------------------------*/
-/* Delete a session (replace xxx with an existing session id)
-/*-----------------------------------------------------------------------------------*/
-
-// ten99policy.apply.sessions
-//   .del('xxx')
-//   .then((message) => console.log(message))
-//   .catch((error) => console.error(error));
