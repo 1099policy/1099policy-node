@@ -54,12 +54,3 @@ ten99policy.quotes
   .retrieve('xxx')
   .then((message) => console.log(message))
   .catch((error) => console.error(error));
-
-/* -----------------------------------------------------------------------------------*/
-/* Delete a quote (replace xxx with an existing quote id)
-/*-----------------------------------------------------------------------------------*/
-
-ten99policy.quotes
-  .del('xxx')
-  .then((message) => console.log(message))
-  .catch((error) => console.error(error));
