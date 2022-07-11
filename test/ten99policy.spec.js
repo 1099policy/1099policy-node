@@ -51,16 +51,16 @@ describe('Ten99Policy Module', function() {
           key: testUtils.getUserTen99PolicyKey(),
           maxNetworkRetries: 2,
           timeout: 123,
-          host: 'foo.ten99policy.com',
+          host: 'foo.1099policy.com',
         });
       }).to.not.throw();
     });
 
-    it('should forbid sending http to *.ten99policy.com', () => {
+    it('should forbid sending http to *.1099policy.com', () => {
       expect(() => {
         Ten99Policy({
           key: testUtils.getUserTen99PolicyKey(),
-          host: 'foo.ten99policy.com',
+          host: 'foo.1099policy.com',
           protocol: 'http',
         });
       }).to.throw(/The `https` protocol must be used/);
@@ -76,7 +76,7 @@ describe('Ten99Policy Module', function() {
         Ten99Policy({
           key: testUtils.getUserTen99PolicyKey(),
           protocol: 'http',
-          host: 'api.ten99policy.com',
+          host: 'api.1099policy.com',
         });
       }).to.throw(/The `https` protocol must be used/);
 
@@ -84,14 +84,14 @@ describe('Ten99Policy Module', function() {
         Ten99Policy({
           key: testUtils.getUserTen99PolicyKey(),
           protocol: 'https',
-          host: 'api.ten99policy.com',
+          host: 'api.1099policy.com',
         });
       }).not.to.throw();
 
       expect(() => {
         Ten99Policy({
           key: testUtils.getUserTen99PolicyKey(),
-          host: 'api.ten99policy.com',
+          host: 'api.1099policy.com',
         });
       }).not.to.throw();
 
