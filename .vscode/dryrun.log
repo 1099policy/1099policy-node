@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/cfkarakulak/ten99policy-node'
+echo "" > VERSION
+perl -pi -e 's|"version": "[.\-\d\w]+"|"version": ""|' package.json
+make: Leaving directory `/Users/cfkarakulak/ten99policy-node'
+

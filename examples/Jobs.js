@@ -7,9 +7,10 @@
 const Ten99Policy = require('../lib/ten99policy.js');
 const ten99policy = new Ten99Policy({
   key: 't9sk_test_29374df8-4462-4900-ad3a-145aa46fbfca',
-  host: 'localhost',
+  host: '127.0.0.1',
   port: '5000',
   protocol: 'http',
+  environment: 'sandbox',
 });
 
 /* -----------------------------------------------------------------------------------*/

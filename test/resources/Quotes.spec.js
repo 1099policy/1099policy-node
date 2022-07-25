@@ -1,207 +1,207 @@
 'use strict';
 
-const ten99quote = require('../../testUtils').getSpyableTen99Policy();
+const ten99policy = require('../../testUtils').getSpyableTen99policy();
+const testUtils = require('../../testUtils');
 const expect = require('chai').expect;
 
-const TEST_AUTH_KEY = 'aGN0bIwXnHdw5645VABjPdSn8nWY7G11';
+const QUOTE_TEST_ID = 'qt_123';
 
-describe('Quote Resource', () => {
-  describe('retrieve', () => {
+describe('Quotes Resource', () => {
+  describe('create', () => {
     it('Sends the correct request', () => {
-      ten99quote.quotes.retrieve('abcdef');
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'GET',
-        url: '/api/v1/quotes/abcdef',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {},
-        settings: {},
-      });
-    });
-
-    it('Sends the correct request [with specified auth]', () => {
-      ten99quote.quotes.retrieve('abcdef', TEST_AUTH_KEY);
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'GET',
-        url: '/api/v1/quotes/abcdef',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {},
-        auth: TEST_AUTH_KEY,
+      const params = {
+        customer: 'cus_xyz',
+        line_items: [{price: 'price_abc', quantity: 5}, {price: 'price_xyz'}],
+      };
+      ten99policy.quotes.create(params);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'POST',
+        url: '/v1/quotes',
+        headers: {},
+        data: params,
         settings: {},
       });
     });
   });
 
-  describe('create', () => {
+  describe('list', () => {
     it('Sends the correct request', () => {
-      ten99quote.quotes.create({description: 'Some quote'});
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {description: 'Some quote'},
-        settings: {},
-      });
-    });
-
-    it('Sends the correct request [with specified auth]', () => {
-      ten99quote.quotes.create({description: 'Some quote'}, TEST_AUTH_KEY);
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {description: 'Some quote'},
-        auth: TEST_AUTH_KEY,
-        settings: {},
-      });
-    });
-
-    it('Sends the correct request [with specified auth and no body]', () => {
-      ten99quote.quotes.create(TEST_AUTH_KEY);
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      ten99policy.quotes.list();
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'GET',
+        url: '/v1/quotes',
+        headers: {},
         data: {},
-        auth: TEST_AUTH_KEY,
         settings: {},
       });
     });
+  });
 
-    it('Sends the correct request [with specified idempotencyKey in options]', () => {
-      ten99quote.quotes.create(
-        {description: 'Some quote'},
-        {idempotencyKey: 'foo'}
-      );
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Idempotency-Key': 'foo',
-          'Content-Type': 'application/json',
-        },
-        data: {description: 'Some quote'},
-        settings: {},
-      });
-    });
-
-    it('Sends the correct request [with specified auth in options]', () => {
-      ten99quote.quotes.create(
-        {description: 'Some quote'},
-        {apiKey: TEST_AUTH_KEY}
-      );
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: {description: 'Some quote'},
-        auth: TEST_AUTH_KEY,
-        settings: {},
-      });
-    });
-
-    it('Sends the correct request [with specified auth and idempotent key in options]', () => {
-      ten99quote.quotes.create(
-        {description: 'Some quote'},
-        {apiKey: TEST_AUTH_KEY, idempotencyKey: 'foo'}
-      );
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Idempotency-Key': 'foo',
-          'Content-Type': 'application/json',
-        },
-        data: {description: 'Some quote'},
-        auth: TEST_AUTH_KEY,
-        settings: {},
-      });
-    });
-
-    it('Sends the correct request [with specified auth in options and no body]', () => {
-      ten99quote.quotes.create({apiKey: TEST_AUTH_KEY});
-      expect(ten99quote.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/api/v1/quotes',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+  describe('retrieve', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.retrieve(QUOTE_TEST_ID);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'GET',
+        url: `/v1/quotes/${QUOTE_TEST_ID}`,
+        headers: {},
         data: {},
-        auth: TEST_AUTH_KEY,
         settings: {},
       });
     });
+  });
 
-    describe('update', () => {
-      it('Sends the correct request', () => {
-        ten99quote.quotes.update('abcdef', {
-          description: 'Foo "baz"',
-        });
-        expect(ten99quote.LAST_REQUEST).to.deep.equal({
-          method: 'PUT',
-          url: '/api/v1/quotes/abcdef',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: {description: 'Foo "baz"'},
-          settings: {},
-        });
+  describe('update', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.update(QUOTE_TEST_ID, {
+        metadata: {key: 'value'},
+      });
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'POST',
+        url: `/v1/quotes/${QUOTE_TEST_ID}`,
+        headers: {},
+        data: {metadata: {key: 'value'}},
+        settings: {},
       });
     });
+  });
 
-    describe('del', () => {
-      it('Sends the correct request', () => {
-        ten99quote.quotes.del('abcdef');
-        expect(ten99quote.LAST_REQUEST).to.deep.equal({
-          method: 'DELETE',
-          url: '/api/v1/quotes/abcdef',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: {},
-          settings: {},
-        });
+  describe('accept', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.accept(QUOTE_TEST_ID);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'POST',
+        url: `/v1/quotes/${QUOTE_TEST_ID}/accept`,
+        headers: {},
+        data: {},
+        settings: {},
       });
     });
+  });
 
-    describe('list', () => {
-      it('Sends the correct request', () => {
-        ten99quote.quotes.list();
-        expect(ten99quote.LAST_REQUEST).to.deep.equal({
-          method: 'GET',
-          url: '/api/v1/quotes',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: {},
-          settings: {},
-        });
+  describe('cancel', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.cancel(QUOTE_TEST_ID);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'POST',
+        url: `/v1/quotes/${QUOTE_TEST_ID}/cancel`,
+        headers: {},
+        data: {},
+        settings: {},
       });
+    });
+  });
 
-      it('Sends the correct request [with specified auth]', () => {
-        ten99quote.quotes.list(TEST_AUTH_KEY);
-        expect(ten99quote.LAST_REQUEST).to.deep.equal({
-          method: 'GET',
-          url: '/api/v1/quotes',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: {},
-          auth: TEST_AUTH_KEY,
-          settings: {},
-        });
+  describe('finalize', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.finalizeQuote(QUOTE_TEST_ID);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'POST',
+        url: `/v1/quotes/${QUOTE_TEST_ID}/finalize`,
+        headers: {},
+        data: {},
+        settings: {},
       });
+    });
+  });
+
+  describe('listLineItems', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.listLineItems(QUOTE_TEST_ID);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'GET',
+        url: `/v1/quotes/${QUOTE_TEST_ID}/line_items`,
+        headers: {},
+        data: {},
+        settings: {},
+      });
+    });
+  });
+
+  describe('listComputedUpfrontLineItems', () => {
+    it('Sends the correct request', () => {
+      ten99policy.quotes.listComputedUpfrontLineItems(QUOTE_TEST_ID);
+      expect(ten99policy.LAST_REQUEST).to.deep.equal({
+        method: 'GET',
+        url: `/v1/quotes/${QUOTE_TEST_ID}/computed_upfront_line_items`,
+        headers: {},
+        data: {},
+        settings: {},
+      });
+    });
+  });
+
+  describe('pdf', () => {
+    it('success', (callback) => {
+      const handleRequest = (req, res) => {
+        res.write('Ten99policy binary response');
+        res.end();
+      };
+
+      testUtils.getTestServerTen99policy(
+        {},
+        handleRequest,
+        (err, ten99policy, closeServer) => {
+          if (err) {
+            return callback(err);
+          }
+
+          return ten99policy.quotes.pdf(
+            'foo_123',
+            {host: 'localhost'},
+            (err, res) => {
+              closeServer();
+              if (err) {
+                return callback(err);
+              }
+              const chunks = [];
+              res.on('data', (chunk) => chunks.push(chunk));
+              res.on('error', callback);
+              res.on('end', () => {
+                expect(Buffer.concat(chunks).toString()).to.equal(
+                  'Ten99policy binary response'
+                );
+                return callback();
+              });
+            }
+          );
+        }
+      );
+    });
+
+    it('failure', (callback) => {
+      const handleRequest = (req, res) => {
+        setTimeout(() => res.writeHead(500));
+        setTimeout(
+          () =>
+            res.write(
+              '{"error": "api_error", "error_description": "this is bad"}'
+            ),
+          10
+        );
+        setTimeout(() => res.end(), 20);
+      };
+
+      testUtils.getTestServerTen99policy(
+        {},
+        handleRequest,
+        (err, ten99policy, closeServer) => {
+          if (err) {
+            return callback(err);
+          }
+
+          return ten99policy.quotes.pdf(
+            'foo_123',
+            {host: 'localhost'},
+            (err, res) => {
+              closeServer();
+              expect(err).to.exist;
+              expect(err.raw.type).to.equal('api_error');
+              expect(err.raw.message).to.equal('this is bad');
+              return callback();
+            }
+          );
+        }
+      );
     });
   });
 });
