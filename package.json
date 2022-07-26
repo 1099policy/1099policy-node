@@ -4,23 +4,21 @@
   "description": "Ten99policy API wrapper",
   "keywords": [
     "ten99policy",
-    "payment processing",
-    "credit cards",
+    "1099policy",
+    "insurance provider",
     "api"
   ],
-  "homepage": "https://github.com/ten99policy/ten99policy-node",
+  "homepage": "https://github.com/1099policy/ten99policy-node",
   "author": "Ten99policy <support@1099policy.com> (https://1099policy.com/)",
   "contributors": [
-    "Ask Bjørn Hansen <ask@develooper.com> (http://www.askask.com/)",
-    "Michelle Bu <michelle@1099policy.com>",
-    "Alex Sexton <alex@1099policy.com>",
-    "James Padolsey"
+    "Ray Ventura <ray@1099policy.com>",
+    "Cemre Fatih Karakulak <cradexco@gmail.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ten99policy/ten99policy-node.git"
+    "url": "git://github.com/1099policy/ten99policy-node.git"
   },
-  "bugs": "https://github.com/ten99policy/ten99policy-node/issues",
+  "bugs": "https://github.com/1099policy/ten99policy-node/issues",
   "engines": {
     "node": "^8.1 || >=10.*"
   },

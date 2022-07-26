@@ -5,3 +5,4 @@ tags
 coverage
 .idea
 test
+.DS_Store
