@@ -6,3 +6,4 @@ coverage
 .idea
 test
 .DS_Store
+.vscode/targets.log
