@@ -14,7 +14,7 @@ const ResourceNamespace = require('../lib/ResourceNamespace').ResourceNamespace;
 const testingHttpAgent = new http.Agent({keepAlive: false});
 
 const utils = (module.exports = {
-  getTestServerTen99policy: (clientOptions, handler, callback) => {
+  getTestServerTen99Policy: (clientOptions, handler, callback) => {
     const server = http.createServer((req, res) => {
       const {shouldStayOpen} = handler(req, res) || {};
       if (!shouldStayOpen) {
@@ -26,7 +26,7 @@ const utils = (module.exports = {
     server.listen(0, () => {
       const {port} = server.address();
       const ten99policy = require('../lib/ten99policy')(
-        module.exports.getUserTen99policyKey(),
+        module.exports.getUserTen99PolicyKey(),
         {
           host: '127.0.0.1',
           port,
@@ -41,7 +41,7 @@ const utils = (module.exports = {
     });
   },
 
-  getTen99policyMockClient: () => {
+  getTen99PolicyMockClient: () => {
     const ten99policy = require('../lib/ten99policy');
 
     return ten99policy('sk_test_123', {
@@ -51,14 +51,14 @@ const utils = (module.exports = {
     });
   },
 
-  getUserTen99policyKey: () => {
+  getUserTen99PolicyKey: () => {
     const key =
       process.env.STRIPE_TEST_API_KEY || 'tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I';
 
     return key;
   },
 
-  getSpyableTen99policy: () => {
+  getSpyableTen99Policy: () => {
     // Provide a testable ten99policy instance
     // That is, with mock-requests built in and hookable
 
@@ -72,7 +72,7 @@ const utils = (module.exports = {
     }
 
     function makeInstanceSpyable(ten99policyInstance, thisInstance) {
-      if (thisInstance instanceof ten99policy.Ten99policyResource) {
+      if (thisInstance instanceof ten99policy.Ten99PolicyResource) {
         patchRequest(ten99policyInstance, thisInstance);
       } else if (thisInstance instanceof ResourceNamespace) {
         const namespace = thisInstance;
@@ -132,7 +132,7 @@ const utils = (module.exports = {
       const self = this;
       this._cleanupFns = [];
       this._ten99policy = require('../lib/ten99policy')(
-        utils.getUserTen99policyKey(),
+        utils.getUserTen99PolicyKey(),
         'latest'
       );
       afterEach(function(done) {

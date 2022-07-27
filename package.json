@@ -1,7 +1,7 @@
 {
   "name": "ten99policy",
   "version": "9.15.0",
-  "description": "Ten99policy API wrapper",
+  "description": "Ten99Policy API wrapper",
   "keywords": [
     "ten99policy",
     "1099policy",
@@ -9,7 +9,7 @@
     "api"
   ],
   "homepage": "https://github.com/1099policy/ten99policy-node",
-  "author": "Ten99policy <support@1099policy.com> (https://1099policy.com/)",
+  "author": "Ten99Policy <support@1099policy.com> (https://1099policy.com/)",
   "contributors": [
     "Ray Ventura <ray@1099policy.com>",
     "Cemre Fatih Karakulak <cradexco@gmail.com>"

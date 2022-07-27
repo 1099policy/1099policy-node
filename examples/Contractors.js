@@ -24,7 +24,7 @@ ten99policy.contractors
     last_name: 'Doe',
     email: 'xxx@gmail.com',
     phone: '415-111-1111',
-    tax_identification: 123,
+    tax_identification: '123-456789',
     address: {
       line1: '2211 Mission St',
       line2: '',
