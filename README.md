@@ -23,8 +23,8 @@ Sign up for a developer account to view and manage your API keys from the the 10
 
 <!-- prettier-ignore -->
 ```js
-const T99P = require('ten99policy');
-const ten99policy = new T99P({
+const Ten99Policy = require('ten99policy');
+const ten99policy = new Ten99Policy({
   'key': 't9sk_test_...',
 })
 
@@ -35,6 +35,7 @@ ten99policy.contractors.create({
   last_name: "Doe",
   email: "example@gmail.com",
   phone: "415-111-1111",
+  tax_identification: "123-456789",
   address:{
     line1: "2211 Mission St",
     line2: "",

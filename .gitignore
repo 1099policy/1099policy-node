@@ -3,3 +3,7 @@ node_modules
 tags
 .nyc_output
 coverage
+.idea
+test
+.DS_Store
+.vscode/targets.log

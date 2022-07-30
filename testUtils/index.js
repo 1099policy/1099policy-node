@@ -1,17 +1,59 @@
-/* eslint-disable no-loop-func */
-/* eslint-disable lines-around-directive */
 'use strict';
 
+// NOTE: testUtils should be require'd before anything else in each spec file!
+
 require('mocha');
+// Ensure we are using the 'as promised' libs before any tests are run:
 require('chai').use(require('chai-as-promised'));
 
+const http = require('http');
+
+const CryptoProvider = require('../lib/crypto/CryptoProvider');
 const ResourceNamespace = require('../lib/ResourceNamespace').ResourceNamespace;
 
+const testingHttpAgent = new http.Agent({keepAlive: false});
+
 const utils = (module.exports = {
+  getTestServerTen99Policy: (clientOptions, handler, callback) => {
+    const server = http.createServer((req, res) => {
+      const {shouldStayOpen} = handler(req, res) || {};
+      if (!shouldStayOpen) {
+        res.on('close', () => {
+          server.close();
+        });
+      }
+    });
+    server.listen(0, () => {
+      const {port} = server.address();
+      const ten99policy = require('../lib/ten99policy')(
+        module.exports.getUserTen99PolicyKey(),
+        {
+          host: '127.0.0.1',
+          port,
+          protocol: 'http',
+          httpAgent: testingHttpAgent,
+          ...clientOptions,
+        }
+      );
+      return callback(null, ten99policy, () => {
+        server.close();
+      });
+    });
+  },
+
+  getTen99PolicyMockClient: () => {
+    const ten99policy = require('../lib/ten99policy');
+
+    return ten99policy('sk_test_123', {
+      host: process.env.STRIPE_MOCK_HOST || 'localhost',
+      port: process.env.STRIPE_MOCK_PORT || 12111,
+      protocol: 'http',
+    });
+  },
+
   getUserTen99PolicyKey: () => {
     const key =
-      process.env.TEN99POLICY_TEST_API_KEY ||
-      't9sk_test_29374df8-4462-4900-ad3a-145aa46fbfca';
+      process.env.STRIPE_TEST_API_KEY || 'tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I';
 
     return key;
   },
@@ -21,9 +63,7 @@ const utils = (module.exports = {
     // That is, with mock-requests built in and hookable
 
     const ten99policy = require('../lib/ten99policy');
-    const ten99policyInstance = ten99policy({
-      key: 'fakeAuthToken',
-    });
+    const ten99policyInstance = ten99policy('fakeAuthToken');
 
     ten99policyInstance.REQUESTS = [];
 
@@ -90,15 +130,11 @@ const utils = (module.exports = {
 
     function CleanupUtility(timeout) {
       const self = this;
-
       this._cleanupFns = [];
-      this._ten99policy = require('../lib/ten99policy')({
-        key: utils.getUserTen99PolicyKey(),
-        host: 'localhost',
-        port: '5000',
-        protocol: 'http',
-      });
-
+      this._ten99policy = require('../lib/ten99policy')(
+        utils.getUserTen99PolicyKey(),
+        'latest'
+      );
       afterEach(function(done) {
         this.timeout(timeout || CleanupUtility.DEFAULT_TIMEOUT);
         return self.doCleanup(done);
@@ -109,10 +145,8 @@ const utils = (module.exports = {
       doCleanup(done) {
         const cleanups = this._cleanupFns;
         const total = cleanups.length;
-
         let completed = 0;
         let fn;
-
         while ((fn = cleanups.shift())) {
           const promise = fn.call(this);
           if (!promise || !promise.then) {
@@ -141,13 +175,51 @@ const utils = (module.exports = {
       add(fn) {
         this._cleanupFns.push(fn);
       },
-      deleteContractor(contractorId) {
+      deleteCustomer(custId) {
         this.add(function() {
-          return this._ten99policy.contractors.del(contractorId);
+          return this._ten99policy.customers.del(custId);
+        });
+      },
+      deletePlan(pId) {
+        this.add(function() {
+          return this._ten99policy.plans.del(pId);
+        });
+      },
+      deleteCoupon(cId) {
+        this.add(function() {
+          return this._ten99policy.coupons.del(cId);
+        });
+      },
+      deleteInvoiceItem(iiId) {
+        this.add(function() {
+          return this._ten99policy.invoiceItems.del(iiId);
         });
       },
     };
 
     return CleanupUtility;
   })(),
+
+  /**
+   * Get a random string for test Object creation
+   */
+  getRandomString: () => {
+    return Math.random()
+      .toString(36)
+      .slice(2);
+  },
+
+  envSupportsForAwait: () => {
+    return typeof Symbol !== 'undefined' && Symbol.asyncIterator;
+  },
+
+  FakeCryptoProvider: class extends CryptoProvider {
+    computeHMACSignature(payload, secret) {
+      return 'fake signature';
+    }
+
+    computeHMACSignatureAsync(payload, secret) {
+      return Promise.resolve('fake signature');
+    }
+  },
 });

@@ -4,12 +4,13 @@
 /* Initialize 1099Policy API client
 /*-----------------------------------------------------------------------------------*/
 
-const T99P = require('../lib/ten99policy.js');
-const ten99policy = new T99P({
-  key: 't9sk_test_29374df8-4462-4900-ad3a-145aa46fbfca',
-  host: 'localhost',
+const Ten99Policy = require('../lib/ten99policy.js');
+const ten99policy = new Ten99Policy({
+  key: 't9sk_test_651c791e-739d-46a1-b48c-5f9488c7f21c',
+  host: '127.0.0.1',
   port: '5000',
   protocol: 'http',
+  environment: 'sandbox',
 });
 
 /* -----------------------------------------------------------------------------------*/
@@ -21,8 +22,9 @@ ten99policy.contractors
     company_name: 'John & Friends',
     first_name: 'John',
     last_name: 'Doe',
-    email: 'example@gmail.com',
+    email: 'xxx@gmail.com',
     phone: '415-111-1111',
+    tax_identification: '123-456789',
     address: {
       line1: '2211 Mission St',
       line2: '',
@@ -72,6 +74,6 @@ ten99policy.contractors
 /*-----------------------------------------------------------------------------------*/
 
 ten99policy.contractors
-  .del('xxx')
+  .del('cn_CATEjCBsVJ')
   .then((message) => console.log(message))
   .catch((error) => console.error(error));
