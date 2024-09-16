@@ -1,5 +1,4 @@
 'use strict';
-const { InvalidInputError, GeneralError } = require('../lib/errors'); // Import specific errors
 
 /* -----------------------------------------------------------------------------------*/
 /* Initialize Ten99Policy API client
@@ -16,70 +15,51 @@ const ten99policy = new Ten99Policy({
 });
 
 /* -----------------------------------------------------------------------------------*/
-/* Creating a contractor
+/* Creating a policy
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.contractors
+ten99policy.policies
   .create({
-    first_name: 'John',
-    last_name: 'Doe',
-    email: 'johnd@ddoe.com',
-    phone: '415-111-1111',
-    tax_identification: '123-456789',
-    address: {
-      country: 'USA',
-      line1: '2211 Mission St',
-      locality: 'San Francisco',
-      region: 'CA',
-      postalcode: '94110',
-    },
+    quote_id: 'qt_UPmEfS6nNK',
+    is_active: true,
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
-/* Updating a contractor (replace xxx with an existing contractor id)
+/* Updating a policy (replace xxx with an existing policy id)
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.contractors
-  .update('cn_tS3wR3UQ5q', {
-    email: 'john.doe@gmail.com',
-    first_name: 'George',
+ten99policy.policies
+  .update('en_C9Z2DmfHSF', {
+    is_active: false,
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
-/* Fetching the list of contractors
+/* Fetching the list of policies
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.contractors
+ten99policy.policies
   .list()
-  .then((message) => console.log(message))
-  .catch((error) => {
-    if (error instanceof InvalidInputError) {
-      console.error('Invalid input provided:', error.message);
-    } else if (error instanceof GeneralError) {
-      console.error('A general error occurred:', error.message);
-    } else {
-      console.error('An unexpected error occurred:', error.message);
-    }
-  });
-
-/* -----------------------------------------------------------------------------------*/
-/* Retrieving a contractor (replace xxx with an existing contractor id)
-/* -----------------------------------------------------------------------------------*/
-
-ten99policy.contractors
-  .retrieve('cn_9TPKz6B9so')
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
-/* Deleting a contractor (replace xxx with an existing contractor id)
+/* Retrieving a policy (replace xxx with an existing policy id)
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.contractors
-  .del('cn_tS3wR3UQ5q')
+ten99policy.policies
+  .retrieve('en_C9Z2DmfHSF')
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
+
+/* -----------------------------------------------------------------------------------*/
+/* Deleting a policy (replace xxx with an existing policy id)
+/* -----------------------------------------------------------------------------------*/
+
+ten99policy.policies
+  .del('en_C9Z2DmfHSF')
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
