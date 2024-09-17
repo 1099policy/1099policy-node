@@ -40,7 +40,7 @@ ten99policy.quotes
 /* Fetching the list of quotes
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.contractors
+ten99policy.quotes
   .list()
   .then((message) => console.log(message))
   .catch((error) => {
