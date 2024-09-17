@@ -1,5 +1,5 @@
 'use strict';
-const { InvalidInputError, GeneralError } = require('../lib/errors'); // Import specific errors
+const { InvalidInputError, GeneralError } = require('../lib/errors.js'); // Import specific errors
 
 /* -----------------------------------------------------------------------------------*/
 /* Initialize Ten99Policy API client
@@ -13,34 +13,33 @@ const ten99policy = new Ten99Policy({
 });
 
 /* -----------------------------------------------------------------------------------*/
-/* Creating a quote
+/* Creating an assignment
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.quotes
+ten99policy.assignments
   .create({
-    job: 'jb_jsb9KEcTpc',
-    contractor: 'cn_yJBbMeq9QA',
-    coverage_type: ['general', 'workers-comp'],
+    contractor: "cn_kjLKMtApTv",
+    job: "jb_D6ZSaoa2MV",
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
-/* Updating a quote (replace xxx with an existing quote id)
+/* Updating an assignment (replace xxx with an existing assignment id)
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.quotes
-  .update('qt_C9Z2DmfHSF', {
-    name: 'Mechanic',
+ten99policy.assignments
+  .update('an_sF3yUB3BYY', {
+    contractor: "cn_kjLKMtApTv",
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
-/* Fetching the list of quotes
+/* Fetching the list of assignments
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.contractors
+ten99policy.assignments
   .list()
   .then((message) => console.log(message))
   .catch((error) => {
@@ -53,11 +52,21 @@ ten99policy.contractors
     }
   });
 
+
 /* -----------------------------------------------------------------------------------*/
-/* Retrieving a quote (replace xxx with an existing quote id)
+/* Retrieving an assignment (replace xxx with an existing assignment id)
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.quotes
-  .retrieve('qt_C9Z2DmfHSF')
+ten99policy.assignments
+  .retrieve('an_sF3yUB3BYY')
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
+
+/* -----------------------------------------------------------------------------------*/
+/* Deleting an assignment (replace xxx with an existing assignment id)
+/* -----------------------------------------------------------------------------------*/
+
+ten99policy.assignments
+  .del('an_sF3yUB3BYY')
   .then((response) => console.log(response))
   .catch((error) => console.error(error));

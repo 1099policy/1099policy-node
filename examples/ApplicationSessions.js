@@ -13,34 +13,10 @@ const ten99policy = new Ten99Policy({
 });
 
 /* -----------------------------------------------------------------------------------*/
-/* Creating a quote
+/* Fetching the list of sessions
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.quotes
-  .create({
-    job: 'jb_jsb9KEcTpc',
-    contractor: 'cn_yJBbMeq9QA',
-    coverage_type: ['general', 'workers-comp'],
-  })
-  .then((response) => console.log(response))
-  .catch((error) => console.error(error));
-
-/* -----------------------------------------------------------------------------------*/
-/* Updating a quote (replace xxx with an existing quote id)
-/* -----------------------------------------------------------------------------------*/
-
-ten99policy.quotes
-  .update('qt_C9Z2DmfHSF', {
-    name: 'Mechanic',
-  })
-  .then((response) => console.log(response))
-  .catch((error) => console.error(error));
-
-/* -----------------------------------------------------------------------------------*/
-/* Fetching the list of quotes
-/* -----------------------------------------------------------------------------------*/
-
-ten99policy.contractors
+ten99policy.applicationSessions
   .list()
   .then((message) => console.log(message))
   .catch((error) => {
@@ -54,10 +30,34 @@ ten99policy.contractors
   });
 
 /* -----------------------------------------------------------------------------------*/
-/* Retrieving a quote (replace xxx with an existing quote id)
+/* Retrieving a session (replace xxx with an existing session id)
 /* -----------------------------------------------------------------------------------*/
 
-ten99policy.quotes
-  .retrieve('qt_C9Z2DmfHSF')
+ten99policy.applicationSessions
+  .retrieve('ias_01J6Y1AYKH3PM2CTW82EKEXKDK')
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
+
+/* -----------------------------------------------------------------------------------*/
+/* Creating a session
+/* -----------------------------------------------------------------------------------*/
+
+ten99policy.applicationSessions
+  .create({
+    quote: "qt_5mpAcLHoXp",
+    success_url: "http://example.com/success",
+    cancel_url: "http://example.com/cancel"
+  })
+  .then((response) => console.log(response))
+  .catch((error) => console.error(error));
+
+/* -----------------------------------------------------------------------------------*/
+/* Updating a session (replace xxx with an existing session id)
+/* -----------------------------------------------------------------------------------*/
+
+ten99policy.applicationSessions
+  .update('ias_01J6Y1AYKH3PM2CTW82EKEXKDK', {
+    success_url: "http://example.com/success2",
+  })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
