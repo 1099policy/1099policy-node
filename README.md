@@ -1,5 +1,9 @@
 # 1099policy-node
 
+<a href="https://codeclimate.com/github/1099policy/1099policy-node/maintainability"><img src="https://api.codeclimate.com/v1/badges/d26e14fc7a2a1fb19467/maintainability" /></a>
+
+<a href="https://codeclimate.com/github/1099policy/1099policy-node/test_coverage"><img src="https://api.codeclimate.com/v1/badges/d26e14fc7a2a1fb19467/test_coverage" /></a>
+
 A Node.js library for interacting with the 1099Policy API.
 
 ## Overview
