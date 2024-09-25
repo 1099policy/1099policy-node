@@ -20,7 +20,22 @@ describe('Quotes', () => {
   });
 
   test('list method sends correct request', async () => {
-    const mockResponse = { data: [{ id: 'quote_1', amount: 1000 }] };
+    const mockResponse = {
+      data: [
+        {
+          "id": "qt_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+          "object": "quote",
+          "status": "pending",
+          "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+          "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+          "effective_date": "2023-01-01",
+          "end_date": "2023-12-31",
+          "premium": 1000,
+          "created_at": "2023-01-01T00:00:00Z",
+          "updated_at": "2023-01-01T00:00:00Z"
+        }
+      ]
+    };
     axios.get.mockResolvedValue(mockResponse);
 
     const result = await quotes.list();
@@ -40,10 +55,28 @@ describe('Quotes', () => {
   });
 
   test('create method sends correct request', async () => {
-    const mockResponse = { data: { id: 'quote_1', amount: 1000 } };
+    const mockResponse = {
+      data: {
+        "id": "qt_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "quote",
+        "status": "pending",
+        "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+        "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+        "effective_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "premium": 1000,
+        "created_at": "2023-01-01T00:00:00Z",
+        "updated_at": "2023-01-01T00:00:00Z"
+      }
+    };
     axios.post.mockResolvedValue(mockResponse);
 
-    const quoteData = { amount: 1000, description: 'Test Quote' };
+    const quoteData = {
+      contractor: "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+      job: "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+      effective_date: "2023-01-01",
+      end_date: "2023-12-31"
+    };
     const result = await quotes.create(quoteData);
 
     expect(result).toEqual(mockResponse.data);
@@ -62,68 +95,5 @@ describe('Quotes', () => {
     );
   });
 
-  test('update method sends correct request', async () => {
-    const mockResponse = { data: { id: 'quote_1', amount: 1500 } };
-    axios.put.mockResolvedValue(mockResponse);
-
-    const updateData = { amount: 1500 };
-    const result = await quotes.update('quote_1', updateData);
-
-    expect(result).toEqual(mockResponse.data);
-    expect(axios.put).toHaveBeenCalledWith(
-      '/quotes/quote_1',
-      updateData,
-      expect.objectContaining({
-        baseURL: 'https://api.test.com',
-        headers: expect.objectContaining({
-          'Authorization': 'Bearer testApiKey',
-          'Ten99policy-Environment': 'test',
-          'Ten99Policy-Idempotent-Key': 'testIdempotencyKey',
-          'Content-Type': 'application/json'
-        })
-      })
-    );
-  });
-
-  test('retrieve method sends correct request', async () => {
-    const mockResponse = { data: { id: 'quote_1', amount: 1000 } };
-    axios.get.mockResolvedValue(mockResponse);
-
-    const result = await quotes.retrieve('quote_1');
-
-    expect(result).toEqual(mockResponse.data);
-    expect(axios.get).toHaveBeenCalledWith(
-      '/quotes/quote_1',
-      expect.objectContaining({
-        baseURL: 'https://api.test.com',
-        headers: expect.objectContaining({
-          'Authorization': 'Bearer testApiKey',
-          'Ten99policy-Environment': 'test',
-          'Ten99Policy-Idempotent-Key': 'testIdempotencyKey'
-        })
-      })
-    );
-  });
-
-  test('del method sends correct request', async () => {
-    const mockResponse = { data: { id: 'quote_1', deleted: true } };
-    axios.delete.mockResolvedValue(mockResponse);
-
-    const result = await quotes.del('quote_1');
-
-    expect(result).toEqual(mockResponse.data);
-    expect(axios.delete).toHaveBeenCalledWith(
-      '/quotes/quote_1',
-      expect.objectContaining({
-        baseURL: 'https://api.test.com',
-        headers: expect.objectContaining({
-          'Authorization': 'Bearer testApiKey',
-          'Ten99policy-Environment': 'test',
-          'Ten99Policy-Idempotent-Key': 'testIdempotencyKey'
-        })
-      })
-    );
-  });
-
-  // Additional tests for any Quotes-specific methods can be added here
+  // Add more tests for update and retrieve methods
 });

@@ -20,7 +20,22 @@ describe('Policies', () => {
   });
 
   test('list method sends correct request', async () => {
-    const mockResponse = { data: [{ id: 'pol_1', name: 'Test Policy' }] };
+    const mockResponse = {
+      data: [
+        {
+          "id": "po_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+          "object": "policy",
+          "status": "active",
+          "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+          "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+          "effective_date": "2023-01-01",
+          "end_date": "2023-12-31",
+          "premium": 1000,
+          "created_at": "2023-01-01T00:00:00Z",
+          "updated_at": "2023-01-01T00:00:00Z"
+        }
+      ]
+    };
     axios.get.mockResolvedValue(mockResponse);
 
     const result = await policies.list();
@@ -40,10 +55,28 @@ describe('Policies', () => {
   });
 
   test('create method sends correct request', async () => {
-    const mockResponse = { data: { id: 'pol_1', name: 'New Policy' } };
+    const mockResponse = {
+      data: {
+        "id": "po_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "policy",
+        "status": "active",
+        "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+        "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+        "effective_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "premium": 1000,
+        "created_at": "2023-01-01T00:00:00Z",
+        "updated_at": "2023-01-01T00:00:00Z"
+      }
+    };
     axios.post.mockResolvedValue(mockResponse);
 
-    const policyData = { name: 'New Policy', description: 'A new insurance policy' };
+    const policyData = {
+      contractor: "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+      job: "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+      effective_date: "2023-01-01",
+      end_date: "2023-12-31"
+    };
     const result = await policies.create(policyData);
 
     expect(result).toEqual(mockResponse.data);
@@ -63,15 +96,28 @@ describe('Policies', () => {
   });
 
   test('update method sends correct request', async () => {
-    const mockResponse = { data: { id: 'pol_1', name: 'Updated Policy' } };
+    const mockResponse = {
+      data: {
+        "id": "po_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "policy",
+        "status": "active",
+        "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+        "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+        "effective_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "premium": 1200,
+        "created_at": "2023-01-01T00:00:00Z",
+        "updated_at": "2023-01-02T00:00:00Z"
+      }
+    };
     axios.put.mockResolvedValue(mockResponse);
 
-    const updateData = { name: 'Updated Policy' };
-    const result = await policies.update('pol_1', updateData);
+    const updateData = { premium: 1200 };
+    const result = await policies.update('po_01HF3JTGBHVJT9QWVQKJT9QW1Q', updateData);
 
     expect(result).toEqual(mockResponse.data);
     expect(axios.put).toHaveBeenCalledWith(
-      '/policies/pol_1',
+      '/policies/po_01HF3JTGBHVJT9QWVQKJT9QW1Q',
       updateData,
       expect.objectContaining({
         baseURL: 'https://api.test.com',
@@ -86,14 +132,27 @@ describe('Policies', () => {
   });
 
   test('retrieve method sends correct request', async () => {
-    const mockResponse = { data: { id: 'pol_1', name: 'Test Policy' } };
+    const mockResponse = {
+      data: {
+        "id": "po_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "policy",
+        "status": "active",
+        "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+        "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+        "effective_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "premium": 1000,
+        "created_at": "2023-01-01T00:00:00Z",
+        "updated_at": "2023-01-01T00:00:00Z"
+      }
+    };
     axios.get.mockResolvedValue(mockResponse);
 
-    const result = await policies.retrieve('pol_1');
+    const result = await policies.retrieve('po_01HF3JTGBHVJT9QWVQKJT9QW1Q');
 
     expect(result).toEqual(mockResponse.data);
     expect(axios.get).toHaveBeenCalledWith(
-      '/policies/pol_1',
+      '/policies/po_01HF3JTGBHVJT9QWVQKJT9QW1Q',
       expect.objectContaining({
         baseURL: 'https://api.test.com',
         headers: expect.objectContaining({
@@ -106,14 +165,20 @@ describe('Policies', () => {
   });
 
   test('del method sends correct request', async () => {
-    const mockResponse = { data: { id: 'pol_1', deleted: true } };
+    const mockResponse = {
+      data: {
+        "id": "po_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "policy",
+        "deleted": true
+      }
+    };
     axios.delete.mockResolvedValue(mockResponse);
 
-    const result = await policies.del('pol_1');
+    const result = await policies.del('po_01HF3JTGBHVJT9QWVQKJT9QW1Q');
 
     expect(result).toEqual(mockResponse.data);
     expect(axios.delete).toHaveBeenCalledWith(
-      '/policies/pol_1',
+      '/policies/po_01HF3JTGBHVJT9QWVQKJT9QW1Q',
       expect.objectContaining({
         baseURL: 'https://api.test.com',
         headers: expect.objectContaining({
@@ -124,6 +189,4 @@ describe('Policies', () => {
       })
     );
   });
-
-  // Additional tests for any Policies-specific methods can be added here
 });

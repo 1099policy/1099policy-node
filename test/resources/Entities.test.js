@@ -20,7 +20,26 @@ describe('Entities', () => {
   });
 
   test('list method sends correct request', async () => {
-    const mockResponse = { data: [{ id: 1, name: 'Test Entity' }] };
+    const mockResponse = {
+      data: [
+        {
+          "id": "en_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+          "object": "entity",
+          "name": "Acme Inc.",
+          "type": "corporation",
+          "tax_id": "123456789",
+          "address": {
+            "line1": "123 Main St",
+            "city": "San Francisco",
+            "state": "CA",
+            "postal_code": "94105",
+            "country": "US"
+          },
+          "created_at": "2023-01-01T00:00:00Z",
+          "updated_at": "2023-01-01T00:00:00Z"
+        }
+      ]
+    };
     axios.get.mockResolvedValue(mockResponse);
 
     const result = await entities.list();
@@ -40,15 +59,44 @@ describe('Entities', () => {
   });
 
   test('create method sends correct request', async () => {
-    const mockResponse = { data: { id: 1, name: 'New Entity' } };
+    const mockResponse = {
+      data: {
+        "id": "en_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "entity",
+        "name": "Acme Inc.",
+        "type": "corporation",
+        "tax_id": "123456789",
+        "address": {
+          "line1": "123 Main St",
+          "city": "San Francisco",
+          "state": "CA",
+          "postal_code": "94105",
+          "country": "US"
+        },
+        "created_at": "2023-01-01T00:00:00Z",
+        "updated_at": "2023-01-01T00:00:00Z"
+      }
+    };
     axios.post.mockResolvedValue(mockResponse);
 
-    const result = await entities.create({ name: 'New Entity' });
+    const entityData = {
+      name: "Acme Inc.",
+      type: "corporation",
+      tax_id: "123456789",
+      address: {
+        line1: "123 Main St",
+        city: "San Francisco",
+        state: "CA",
+        postal_code: "94105",
+        country: "US"
+      }
+    };
+    const result = await entities.create(entityData);
 
     expect(result).toEqual(mockResponse.data);
     expect(axios.post).toHaveBeenCalledWith(
       '/entities',
-      { name: 'New Entity' },
+      entityData,
       expect.objectContaining({
         baseURL: 'https://api.test.com',
         headers: expect.objectContaining({

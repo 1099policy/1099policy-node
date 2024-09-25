@@ -20,7 +20,21 @@ describe('ApplicationSessions', () => {
   });
 
   test('list method sends correct request', async () => {
-    const mockResponse = { data: [{ id: 1 }] };
+    const mockResponse = {
+      data: [
+        {
+          "id": "as_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+          "object": "application_session",
+          "status": "active",
+          "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+          "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+          "url": "https://apply.1099policy.com/s/abcdefghijklmnop",
+          "expires_at": "2023-12-31T23:59:59Z",
+          "created_at": "2023-01-01T00:00:00Z",
+          "updated_at": "2023-01-01T00:00:00Z"
+        }
+      ]
+    };
     axios.get.mockResolvedValue(mockResponse);
 
     const result = await applicationSessions.list();
@@ -39,5 +53,43 @@ describe('ApplicationSessions', () => {
     );
   });
 
-  // Add more tests for create, update, retrieve, and del methods
+  test('create method sends correct request', async () => {
+    const mockResponse = {
+      data: {
+        "id": "as_01HF3JTGBHVJT9QWVQKJT9QW1Q",
+        "object": "application_session",
+        "status": "active",
+        "contractor": "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+        "job": "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q",
+        "url": "https://apply.1099policy.com/s/abcdefghijklmnop",
+        "expires_at": "2023-12-31T23:59:59Z",
+        "created_at": "2023-01-01T00:00:00Z",
+        "updated_at": "2023-01-01T00:00:00Z"
+      }
+    };
+    axios.post.mockResolvedValue(mockResponse);
+
+    const sessionData = {
+      contractor: "cn_01HF3JTGBHVJT9QWVQKJT9QW2Q",
+      job: "jb_01HF3JTGBHVJT9QWVQKJT9QW3Q"
+    };
+    const result = await applicationSessions.create(sessionData);
+
+    expect(result).toEqual(mockResponse.data);
+    expect(axios.post).toHaveBeenCalledWith(
+      '/apply/sessions',
+      sessionData,
+      expect.objectContaining({
+        baseURL: 'https://api.test.com',
+        headers: expect.objectContaining({
+          'Authorization': 'Bearer testApiKey',
+          'Ten99policy-Environment': 'test',
+          'Ten99Policy-Idempotent-Key': 'testIdempotencyKey',
+          'Content-Type': 'application/json'
+        })
+      })
+    );
+  });
+
+  // Add more tests for update, retrieve, and del methods as needed
 });
