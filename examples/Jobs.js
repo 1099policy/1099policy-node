@@ -27,7 +27,24 @@ ten99policy.jobs
     entity: 'en_FwZfQRe4aW',
     category_code: 'jc_MTqpkbkp6G',
   })
+  /**
+   * Handles the response from a Promise
+   * @param {any} response - The resolved value of the Promise
+   * @returns {void} This method doesn't return a value
+   */
   .then((response) => console.log(response))
+  /**
+   * Catches and logs any errors that occur in the preceding Promise chain
+   * @param {Error} error - The error object caught from the Promise rejection
+   * @returns {void} This method does not return a value
+   */
+  ```
+  /**
+   * Handles the response from a Promise
+   * @param {*} response - The resolved value from the Promise
+   * @returns {void} This method doesn't return anything
+   */
+  ```
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
@@ -39,6 +56,11 @@ ten99policy.jobs
     name: 'Mechanic',
   })
   .then((response) => console.log(response))
+  /**
+   * Catches and logs any errors that occur in the preceding Promise chain
+   * @param {Error} error - The error object caught from the Promise rejection
+   * @returns {void} This method doesn't return anything
+   */
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
@@ -47,6 +69,18 @@ ten99policy.jobs
 
 ten99policy.jobs
   .list()
+  /**
+   ```
+   /**
+    * Catches and handles errors thrown during the execution of the previous operation
+    * @param {Error} error - The error object caught by the catch block
+    * @returns {void} This function doesn't return a value
+    */
+   ```
+   * Logs the received message to the console
+   * @param {any} message - The message to be logged
+   * @returns {void} This method does not return a value
+   */
   .then((message) => console.log(message))
   .catch((error) => {
     if (error instanceof InvalidInputError) {
@@ -64,7 +98,19 @@ ten99policy.jobs
 
 ten99policy.jobs
   .retrieve('jb_C9Z2DmfHSF')
+  ```
+  /**
+   * Handles the response from a previous Promise
+   * @param {*} response - The response received from the Promise
+   * @returns {void} This function does not return a value
+   */
+  ```
   .then((response) => console.log(response))
+  /**
+   * Catches and logs any errors that occur in the preceding Promise chain
+   * @param {Error} error - The error object caught from the Promise rejection
+   * @returns {void} This method doesn't return anything
+   */
   .catch((error) => console.error(error));
 
 /* -----------------------------------------------------------------------------------*/
@@ -73,5 +119,17 @@ ten99policy.jobs
 
 ten99policy.jobs
   .del('jb_C9Z2DmfHSF')
+  ```
+  /**
+   * Handles the response from a promise
+   * @param {Object} response - The response object from the resolved promise
+   * @returns {void} This method doesn't return anything, it logs the response to the console
+   */
+  ```
   .then((response) => console.log(response))
+  /**
+   * Catches and logs any errors that occur in the preceding Promise chain
+   * @param {Error} error - The error object thrown by the previous Promise
+   * @returns {void} This method doesn't return anything
+   */
   .catch((error) => console.error(error));
