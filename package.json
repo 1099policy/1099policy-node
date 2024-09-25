@@ -3,6 +3,31 @@
     "axios": "^1.7.7"
   },
   "devDependencies": {
-    "eslint": "^9.10.0"
+    "eslint": "^9.10.0",
+    "jest": "^27.5.1",
+    "axios-mock-adapter": "^1.20.0",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-jest": "^27.5.1"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "lib/**/*.js",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": ["text", "lcov"],
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
+    "moduleDirectories": ["node_modules", "lib"],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(axios)/)"
+    ]
   }
 }
