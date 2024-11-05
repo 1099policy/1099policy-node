@@ -1,6 +1,6 @@
 # ten99policy Node.js Library
 
-A Node.js library for inter
+A Node.js library for interacting with the 1099Policy API.
 
 ![Maintainability](https://api.codeclimate.com/v1/badges/d26e14fc7a2a1fb19467/maintainability)
 ![Test Coverage](https://api.codeclimate.com/v1/badges/d26e14fc7a2a1fb19467/test_coverage)
@@ -69,15 +69,15 @@ The `ten99policy-node` library provides a simple and intuitive way to integrate 
 
 Install the package using `npm`:
 
-```bash
+bash
 npm install ten99policy-node
-```
+
 
 ## Configuration
 
 Before using the library, configure it with your API credentials and settings.
 
-```javascript
+javascript
 const Ten99Policy = require('ten99policy-node');
 
 const ten99policy = new Ten99Policy({
@@ -85,7 +85,7 @@ const ten99policy = new Ten99Policy({
   environment: 'production', // or 'sandbox' for testing
   logCurl: true, // Enable logging of CURL commands
 });
-```
+
 
 **Configuration Parameters:**
 
@@ -99,7 +99,7 @@ const ten99policy = new Ten99Policy({
 
 #### Creating an Entity
 
-```javascript
+javascript
 ten99policy.entities
   .create({
     name: 'Brooklyn Bowl',
@@ -117,45 +117,45 @@ ten99policy.entities
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating an Entity
 
-```javascript
+javascript
 ten99policy.entities
   .update('en_C9Z2DmfHSF', {
     name: 'California Roll',
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Entities
 
-```javascript
+javascript
 ten99policy.entities
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving an Entity
 
-```javascript
+javascript
 ten99policy.entities
   .retrieve('en_BUcNa8jMrq') // Replace with an existing entity ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Deleting an Entity
 
-```javascript
+javascript
 ten99policy.entities
   .del('en_C9Z2DmfHSF') // Replace with an existing entity ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -163,7 +163,7 @@ ten99policy.entities
 
 #### Creating a Contractor
 
-```javascript
+javascript
 ten99policy.contractors
   .create({
     first_name: 'John',
@@ -181,11 +181,11 @@ ten99policy.contractors
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating a Contractor
 
-```javascript
+javascript
 ten99policy.contractors
   .update('cn_tS3wR3UQ5q', { // Replace with an existing contractor ID
     email: 'john.doe@gmail.com',
@@ -193,34 +193,34 @@ ten99policy.contractors
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Contractors
 
-```javascript
+javascript
 ten99policy.contractors
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving a Contractor
 
-```javascript
+javascript
 ten99policy.contractors
   .retrieve('cn_9TPKz6B9so') // Replace with an existing contractor ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Deleting a Contractor
 
-```javascript
+javascript
 ten99policy.contractors
   .del('cn_tS3wR3UQ5q') // Replace with an existing contractor ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -228,7 +228,7 @@ ten99policy.contractors
 
 #### Creating an Insurance Application Session
 
-```javascript
+javascript
 ten99policy.applicationSessions
   .create({
     quote: 'qt_yVEnbNaWh6',
@@ -237,11 +237,11 @@ ten99policy.applicationSessions
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating a Session
 
-```javascript
+javascript
 ten99policy.applicationSessions
   .update('ias_01HZSB299T5D9SCNY98T8P10KC', { // Replace with an existing session ID
     success_url: 'http://example.com/success',
@@ -249,25 +249,25 @@ ten99policy.applicationSessions
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Insurance Application Sessions
 
-```javascript
+javascript
 ten99policy.applicationSessions
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving an Insurance Application Session
 
-```javascript
+javascript
 ten99policy.applicationSessions
   .retrieve('ias_01HZSB299T5D9SCNY98T8P10KC') // Replace with an existing session ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -275,7 +275,7 @@ ten99policy.applicationSessions
 
 #### Creating a Job
 
-```javascript
+javascript
 ten99policy.jobs
   .create({
     name: 'Truck driver',
@@ -289,45 +289,45 @@ ten99policy.jobs
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating a Job
 
-```javascript
+javascript
 ten99policy.jobs
   .update('jb_C9Z2DmfHSF', { // Replace with an existing job ID
     name: 'Mechanic',
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Jobs
 
-```javascript
+javascript
 ten99policy.jobs
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving a Job
 
-```javascript
+javascript
 ten99policy.jobs
   .retrieve('jb_C9Z2DmfHSF') // Replace with an existing job ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Deleting a Job
 
-```javascript
+javascript
 ten99policy.jobs
   .del('jb_C9Z2DmfHSF') // Replace with an existing job ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -335,7 +335,7 @@ ten99policy.jobs
 
 #### Creating a Policy
 
-```javascript
+javascript
 ten99policy.policies
   .create({
     quote_id: 'qt_UPmEfS6nNK',
@@ -343,45 +343,45 @@ ten99policy.policies
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating a Policy
 
-```javascript
+javascript
 ten99policy.policies
   .update('po_C9Z2DmfHSF', { // Replace with an existing policy ID
     is_active: false,
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Policies
 
-```javascript
+javascript
 ten99policy.policies
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving a Policy
 
-```javascript
+javascript
 ten99policy.policies
   .retrieve('po_C9Z2DmfHSF') // Replace with an existing policy ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Deleting a Policy
 
-```javascript
+javascript
 ten99policy.policies
   .del('po_C9Z2DmfHSF') // Replace with an existing policy ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -389,7 +389,7 @@ ten99policy.policies
 
 #### Creating a Quote
 
-```javascript
+javascript
 ten99policy.quotes
   .create({
     job: 'jb_jsb9KEcTpc',
@@ -398,36 +398,36 @@ ten99policy.quotes
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating a Quote
 
-```javascript
+javascript
 ten99policy.quotes
   .update('qt_C9Z2DmfHSF', { // Replace with an existing quote ID
     name: 'Mechanic',
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Quotes
 
-```javascript
+javascript
 ten99policy.quotes
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving a Quote
 
-```javascript
+javascript
 ten99policy.quotes
   .retrieve('qt_C9Z2DmfHSF') // Replace with an existing quote ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -435,7 +435,7 @@ ten99policy.quotes
 
 #### Creating an Assignment
 
-```javascript
+javascript
 ten99policy.assignments
   .create({
     contractor: 'cn_kjLKMtApTv',
@@ -443,45 +443,45 @@ ten99policy.assignments
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating an Assignment
 
-```javascript
+javascript
 ten99policy.assignments
   .update('an_sF3yUB3BYY', { // Replace with an existing assignment ID
     contractor: 'cn_kjLKMtApTv',
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Assignments
 
-```javascript
+javascript
 ten99policy.assignments
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving an Assignment
 
-```javascript
+javascript
 ten99policy.assignments
   .retrieve('as_sF3yUB3BYY') // Replace with an existing assignment ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Deleting an Assignment
 
-```javascript
+javascript
 ten99policy.assignments
   .del('as_xyz') // Replace with an existing assignment ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -489,7 +489,7 @@ ten99policy.assignments
 
 #### Creating an Invoice
 
-```javascript
+javascript
 ten99policy.invoices
   .create({
     contractor: 'cn_AWcQPecvx5',
@@ -500,45 +500,45 @@ ten99policy.invoices
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Updating an Invoice
 
-```javascript
+javascript
 ten99policy.invoices
   .update('in_m47rNFQ3PS', { // Replace with an existing invoice ID
     gross_pay: 1500,
   })
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Fetching the List of Invoices
 
-```javascript
+javascript
 ten99policy.invoices
   .list()
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Retrieving an Invoice
 
-```javascript
+javascript
 ten99policy.invoices
   .retrieve('in_m47rNFQ3PS') // Replace with an existing invoice ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 #### Deleting an Invoice
 
-```javascript
+javascript
 ten99policy.invoices
   .del('in_m47rNFQ3PS') // Replace with an existing invoice ID
   .then((response) => console.log(response))
   .catch((error) => console.error(error));
-```
+
 
 ---
 
@@ -546,7 +546,7 @@ ten99policy.invoices
 
 The `ten99policy-node` library uses a promise-based structure and provides specific error classes for handling different error types. Handle potential errors using `.catch()` blocks and by checking the instance of the error.
 
-```javascript
+javascript
 const { InvalidInputError, GeneralError } = require('ten99policy-node');
 
 // Example of handling errors when creating an entity
@@ -565,7 +565,7 @@ ten99policy.entities
       console.error('An unexpected error occurred:', error.message);
     }
   });
-```
+
 
 ## Additional Resources
 
