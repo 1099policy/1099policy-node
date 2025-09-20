@@ -7,7 +7,7 @@ A Node.js library for interacting with the 1099Policy API.
 
 ## Overview
 
-The `ten99policy-node` library provides a simple and intuitive way to integrate 1099Policy's services into your Node.js applications. It allows you to manage entities, contractors, jobs, policies, quotes, assignments, invoices, and insurance application sessions through the 1099Policy API.
+The `ten99policy` library provides a simple and intuitive way to integrate 1099Policy's services into your Node.js applications. It allows you to manage entities, contractors, jobs, policies, quotes, assignments, invoices, and insurance application sessions through the 1099Policy API.
 
 ## Table of Contents
 
@@ -70,7 +70,7 @@ The `ten99policy-node` library provides a simple and intuitive way to integrate 
 Install the package using `npm`:
 
 ```bash
-npm install ten99policy-node
+npm install ten99policy
 ```
 
 ## Configuration
