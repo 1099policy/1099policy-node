@@ -78,7 +78,7 @@ npm install ten99policy
 Before using the library, configure it with your API credentials and settings.
 
 ```javascript
-const Ten99Policy = require('ten99policy-node');
+const Ten99Policy = require('ten99policy');
 
 const ten99policy = new Ten99Policy({
   key: 'your_api_key_here',
@@ -544,10 +544,10 @@ ten99policy.invoices
 
 ## Error Handling
 
-The `ten99policy-node` library uses a promise-based structure and provides specific error classes for handling different error types. Handle potential errors using `.catch()` blocks and by checking the instance of the error.
+The `ten99policy` library uses a promise-based structure and provides specific error classes for handling different error types. Handle potential errors using `.catch()` blocks and by checking the instance of the error.
 
 ```javascript
-const { InvalidInputError, GeneralError } = require('ten99policy-node');
+const { InvalidInputError, GeneralError } = require('ten99policy');
 
 // Example of handling errors when creating an entity
 ten99policy.entities
@@ -575,7 +575,7 @@ ten99policy.entities
 
 ## Support
 
-If you encounter any issues or have questions about using the `ten99policy-node` library, please open an issue on the [GitHub repository](https://github.com/1099policy/1099policy-node/issues) or contact our support team at [support@1099policy.com](mailto:support@1099policy.com).
+If you encounter any issues or have questions about using the `ten99policy` library, please open an issue on the [GitHub repository](https://github.com/1099policy/1099policy-node/issues) or contact our support team at [support@1099policy.com](mailto:support@1099policy.com).
 
 ## License
 
